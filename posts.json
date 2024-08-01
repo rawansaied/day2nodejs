@@ -1,0 +1,16 @@
+{
+  "ca70be10-4904-4477-855d-b6902d96dbe0": {
+    "title": "Sample Post",
+    "content": "This is a sample post content.",
+    "author": "Author Name",
+    "date": "2024-08-02T12:00:00.000Z",
+    "id": "ca70be10-4904-4477-855d-b6902d96dbe0"
+  },
+  "ecc49f62-7f70-4568-a9b4-312420ac7d17": {
+    "title": "hi",
+    "content": "This is a welcome post content.",
+    "author": "Author Name",
+    "date": "2024-09-02T12:00:00.000Z",
+    "id": "ecc49f62-7f70-4568-a9b4-312420ac7d17"
+  }
+}

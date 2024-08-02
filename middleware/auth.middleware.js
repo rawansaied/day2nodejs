@@ -1,17 +1,23 @@
 import jwt from "jsonwebtoken";
 
-const SECRET_KEY = "your_secret_key";
 
-export const auth = (req, res, next) => {
-  const token = req.headers.authorization?.split(" ")[1];
+
+export const authenticateToken = (req, res, next) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
   if (!token) {
-    return res.status(401).json({ message: "No token provided" });
+    console.log('No token found');
+    return res.sendStatus(401); // Unauthorized if no token is found
   }
-  try {
-    const decoded = jwt.verify(token, SECRET_KEY);
-    req.userId = decoded.id;
+
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+    if (err) {
+      console.log('Token verification failed:', err.message);
+      return res.sendStatus(403); // Forbidden if token is invalid or expired
+    }
+    console.log('Token verified successfully:', user);
+    req.user = user;
     next();
-  } catch (error) {
-    res.status(401).json({ message: "Invalid token" });
-  }
+  });
 };

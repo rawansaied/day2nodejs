@@ -50,10 +50,6 @@ export const getAllPosts = (req, res) => {
 
 // Create a new post
 export const createPost = (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
 
     const newPost = req.body;
     const id = uuidv4();

@@ -1,6 +1,7 @@
 import express from 'express';
 import { check, validationResult } from 'express-validator';
 import { getAllPosts, createPost, updatePost, deletePost } from '../controllers/post.controller.js';
+import { authenticateToken } from '../middleware/auth.middleware.js';
 
 const router = express.Router();
 
@@ -13,13 +14,13 @@ const postValidation = [
 ];
 
 // Routes
-router.get('/', getAllPosts);
+router.get('/posts', getAllPosts);
 
-router.post('/', postValidation, createPost);
+router.post('/posts', authenticateToken, createPost);
 
-router.put('/', postValidation, updatePost);
+router.put('/posts', authenticateToken, updatePost);
 
-router.delete('/', (req, res) => {
+router.delete('/posts',authenticateToken,(req, res) => {
     const id = req.query.id;
     if (!id) {
         return res.status(400).json({ error: 'ID is required' });
